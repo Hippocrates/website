@@ -1,0 +1,36 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOMAIN: stephenkiazyk.ca
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read  # This is required for actions/checkout
+
+concurrency:
+  group: "teahouse"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: uheckout
+        uses: actions/checkout@v4
+      - name: setup
+        run: pip install uv
+      - name: sync
+        run: uv sync
+      - name: build
+        run: uv run mkdocs build
+      - name: upload
+        uses: teahouse-hosting/swiss-army-upload@trunk
+        with:
+          src: ./site
+          dest: tea://${{ env.DOMAIN }}/

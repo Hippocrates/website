@@ -1,0 +1,31 @@
+site_name: Stephen Kiazyk's Personal Webpage
+theme:
+  name: material
+  locale: en
+  favicon: assets/images/me.gbp.png
+  logo: assets/images/me.gbp.png
+  palette:
+    - scheme: default
+      primary: black
+      accent: yellow
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: green
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+nav:
+  - Home: index.md
+  - CV: cv.md
+  - Projects: projects.md
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Hippocrates
+    - icon: fontawesome/solid/envelope
+      link: mailto:stephen.kiazyk+contracting@gmail.com
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/stephen-kiazyk-20926040/
