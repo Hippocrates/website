@@ -1,0 +1,360 @@
+:root {
+    --cell-size: 64px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: white;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.main-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.color-picker-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.color-picker-section h2 {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 1.3em;
+}
+
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+#colorWheel {
+    flex-shrink: 0;
+}
+
+.hsb-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hsb-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hsb-input-group label {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hsb-input-group label .range {
+    font-size: 0.8em;
+    color: #999;
+    font-weight: normal;
+}
+
+.hsb-input-group input {
+    width: 80px;
+    padding: 8px 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: 'Courier New', monospace;
+    transition: border-color 0.2s;
+}
+
+.hsb-input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.hsb-input-group input:invalid {
+    border-color: #e74c3c;
+}
+
+.swatch-section {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.swatch-section h3 {
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.history-controls {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.swatch-count-controls {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.swatch-count-controls button {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.swatch-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.swatch-row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 12px;
+}
+
+.swatch-squares {
+    display: flex;
+    gap: 0px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+}
+
+.delete-row-button {
+    align-self: flex-end;
+    margin-bottom: 19px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.add-row-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.swatch-square {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 3px solid #ddd;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.swatch-square:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.swatch-square.active {
+    border-color: #667eea;
+    border-width: 4px;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3),
+                0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.swatch-square .color-label {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7em;
+    color: #666;
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+}
+.file-controls {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #fff3cd;
+    color: #664d03;
+    border: 1px solid #ffecb5;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.toast[hidden] {
+    display: none;
+}
+
+.toast button {
+    background: none;
+    border: none;
+    font-size: 1.3em;
+    cursor: pointer;
+    color: inherit;
+}
+
+.swatch-row-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.hsv-sheet {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(var(--columns, 8), var(--cell-size));
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.hsv-sheet input {
+    width: var(--cell-size);
+    padding: 2px 4px;
+    font-size: 0.8em;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    text-align: center;
+}
+
+.ramp-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+}
+
+.ramp-controls button {
+    width: auto;
+    padding: 0 10px;
+    font-size: 1em;
+}
+
+.desaturate-controls button {
+    width: auto;
+    padding: 0 10px;
+    font-size: 1em;
+}
+
+.ramp-controls input[type="number"] {
+    width: 50px;
+    height: 32px;
+    text-align: center;
+}
+
+.desaturate-controls input[type="number"] {
+    width: 50px;
+    height: 32px;
+    text-align: center;
+}
+
+.ramp-controls label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.9em;
+    color: #555;
+    cursor: pointer;
+}
+
+.desaturate-controls label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.9em;
+    color: #555;
+    cursor: pointer;
+}
+
+.main-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.main-controls .history-controls,
+.main-controls .file-controls {
+    margin-bottom: 0;
+}
+
+.main-controls .file-controls {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+@media (max-width: 800px) {
+    body {
+        padding: 4px;
+    }
+
+    .container {
+        padding: 4px;
+    }
+
+    .main-controls,
+    .color-picker-section {
+        padding: 4px;
+    }
+}
+
+body.scrubbing,
+body.scrubbing * {
+    cursor: ew-resize !important;
+    user-select: none;
+}

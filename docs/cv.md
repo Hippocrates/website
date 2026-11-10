@@ -43,7 +43,7 @@ Feb 2018 \- Jan 2022
 * Worked on a variety of prototypes and gameplay experiments to help determine future company projects  
 * Provided programming support, tools, and bug fixes for other studio titles ([Industries of Titan](https://braceyourselfgames.com/industries-of-titan/) and [Phantom Brigade](https://braceyourselfgames.com/phantom-brigade/))
 
-### **Daydream Software Engineer** Google Inc.
+### **Daydream Software Engineer** [Google Inc.](https://about.google/)
 May 2016 \- Jan 2018
 
 * Implemented tools and built physical motion rigs for testing motion-to-display latency and other metrics to ensure VR devices met minimum requirements to avoid user motion sickness

@@ -17,6 +17,8 @@ theme:
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to light mode
+  features:
+    # No search-related features enabled
 nav:
   - Home: index.md
   - CV: cv.md
@@ -29,3 +31,4 @@ extra:
       link: mailto:stephen.kiazyk+contracting@gmail.com
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/stephen-kiazyk-20926040/
+plugins:
