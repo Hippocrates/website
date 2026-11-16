@@ -391,6 +391,28 @@ function updateSheetColumn(col) {
     });
 }
 
+function relativeLuminance(hex) {
+    const channels = [1, 3, 5].map(start => {
+        const value = parseInt(hex.slice(start, start + 2), 16) / 255;
+        return value <= 0.03928 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+}
+
+function contrastRatioText(hsvA, hsvB) {
+    const lumA = relativeLuminance(hsvToHex(hsvA[0], hsvA[1], hsvA[2]));
+    const lumB = relativeLuminance(hsvToHex(hsvB[0], hsvB[1], hsvB[2]));
+    const ratio = (Math.max(lumA, lumB) + 0.05) / (Math.min(lumA, lumB) + 0.05);
+    return ratio.toFixed(2);
+}
+
+function updateContrastFields() {
+    swatchContainer.querySelectorAll('.contrast-field').forEach(field => {
+        const index = Number(field.dataset.index);
+        field.value = contrastRatioText(palette[activeRow][index], palette[activeRow][index + 1]);
+    });
+}
+
 function createSwatchSquares() {
     swatchContainer.innerHTML = '';
     sheetRow = activeRow;
@@ -422,6 +444,18 @@ function createSwatchSquares() {
             });
             
             squares.appendChild(square);
+
+            if (rowIndex === activeRow && index < colors.length - 1) {
+                const field = document.createElement('input');
+                field.type = 'text';
+                field.readOnly = true;
+                field.tabIndex = -1;
+                field.className = 'contrast-field';
+                field.title = 'Contrast ratio';
+                field.dataset.index = index;
+                field.value = contrastRatioText(hsv, colors[index + 1]);
+                squares.appendChild(field);
+            }
         });
         body.appendChild(squares);
         rowElement.appendChild(body);
@@ -491,6 +525,9 @@ function updateSwatchSquare(rowIndex, index) {
     }
     if (!isUpdatingFromSheet && rowIndex === activeRow) {
         updateSheetColumn(index);
+    }
+    if (rowIndex === activeRow) {
+        updateContrastFields();
     }
 }
 
@@ -683,6 +720,11 @@ rampInput.addEventListener('blur', () => {
     if (rampInput.value === '') rampInput.value = DEFAULT_RAMP;
 });
 rampButton.addEventListener('click', applyRampToActiveRow);
+const showContrastCheckbox = document.getElementById('showContrast');
+showContrastCheckbox.addEventListener('change', () => {
+    swatchContainer.classList.toggle('show-contrast', showContrastCheckbox.checked);
+});
+swatchContainer.classList.toggle('show-contrast', showContrastCheckbox.checked);
 
 // Add input event listeners for real-time updates as user types
 hueInput.addEventListener('input', updateWheelFromInputs);

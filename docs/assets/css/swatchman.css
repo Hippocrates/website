@@ -1,5 +1,6 @@
 :root {
     --cell-size: 64px;
+    --contrast-width: 44px;
 }
 
 * {
@@ -166,6 +167,36 @@ h1 {
     flex-shrink: 0;
 }
 
+.contrast-field {
+    display: none;
+}
+
+.show-contrast .contrast-field {
+    display: flex;
+    box-sizing: border-box;
+    width: var(--contrast-width);
+    align-self: center;
+    flex-shrink: 0;
+    padding: 2px 0;
+    margin: 0;
+    font-size: 0.7em;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    color: #444;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f7f7f7;
+    cursor: default;
+}
+
+.show-contrast .hsv-sheet {
+    column-gap: var(--contrast-width);
+}
+
+.contrast-toggle {
+    margin-left: 12px;
+}
+
 .delete-row-button {
     align-self: flex-end;
     margin-bottom: 19px;
@@ -260,6 +291,7 @@ h1 {
     display: grid;
     grid-auto-flow: row;
     grid-template-columns: repeat(var(--columns, 8), var(--cell-size));
+    column-gap: 0;
     position: relative;
     margin-bottom: 6px;
 }
